@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './Forecast.css';
 
+import { Day } from '../Day/Day';
 
 class Forecast extends Component {
     constructor() {
@@ -18,11 +19,15 @@ class Forecast extends Component {
             humidity: 0,
             windspeed: 0,
             winddeg: 0,
+            week: {},
             isLoading: false
         }
 
         this.updateCoordinates = this.updateCoordinates.bind(this);
         this.fetchWeatherByCoordinates = this.fetchWeatherByCoordinates.bind(this);
+
+        this.extractData = this.extractData.bind(this);
+        this.fetchWeatherFor5days = this.fetchWeatherFor5days.bind(this);
     }
 
     componentWillMount() {
@@ -58,9 +63,41 @@ class Forecast extends Component {
             });
     }
 
+    extractData(forecast) {
+        let week = forecast.list.reduce((dayGroup, currentDay) => {
+            // Get a readable Day from current iterations date
+            const dayDate = new Date(currentDay.dt_txt);
+
+            // Add this to the current object to use for later
+            currentDay.day = dayDate.toDateString().substr(0, 3);
+            currentDay.time = dayDate.toLocaleTimeString();
+
+            // If the accumulator (previous group) has "quasi-index" of the current day
+            // push the current day in to that group since they're of the same day
+            // else create a new array and push the currentday into that one since the day
+            // has obviously changed
+            dayGroup[currentDay.day] = dayGroup[currentDay.day] || []; 
+            dayGroup[currentDay.day].push(currentDay);
+
+            // return the whole array to the next iteration and in the end to the week variable
+            return dayGroup;
+        }, {});
+
+        this.setState({
+            week: week
+        });
+    }
+
+    fetchWeatherFor5days() {
+        fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${this.state.coordLat}&lon=${this.state.coordLong}&APPID=${process.env.REACT_APP_OW_APP_ID}`)
+            .then(response => response.json())
+            .then(this.extractData);
+    }
+
     render() {
         return (
             <React.Fragment>
+            <button onClick={this.fetchWeatherFor5days}>5 days, please!</button>
                 {this.state.weather.length > 0 ?  // if the weather property of the state object contains anything, then <div>-block will be included as the component renders
                     <div className="flexbox">
                         <div>
@@ -79,6 +116,8 @@ class Forecast extends Component {
 
                     : <p>{this.state.isLoading ? 'Fetching the latest results for ya!' : ''}</p> // otherwise, this <p> element will be rendered.
                 }
+
+                { Object.values(this.state.week).map(day => <Day forecast={day} />) }
 
             </React.Fragment>
         );
