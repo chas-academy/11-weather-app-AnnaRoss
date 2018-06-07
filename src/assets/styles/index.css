@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:300,400');
+
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+p,
+img,
+ul,
+li,
+figure,
+figcaption,
+header,
+menu,
+section,
+button,
+input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+ol,
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+:root {
+  --primary: lightseagreen;
+  --secondary: #f8748b;
+  --lightblue: #20b2aa2b;
+  --white: #ffffff;
+  --black: #1b001e;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Barlow Condensed', Helvetica, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.61;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+body > div {
+  margin: 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+section.details,
+section.overview {
+  display: flex;
+  justify-content: center;
+  margin: 0 0.4rem;
+  width: 100%;
+}
+
+.table {
+  flex: 0 1 48rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.table caption {
+  display: flex;
+  flex-direction: column;
+  font-size: 2.4rem;
+  padding: 1rem;
+}
+
+.table caption > span:first-child {
+  font-weight: 600;
+}
+
+.table caption > span:first-child > span {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.table caption > span:nth-child(2) {
+  color: var(--secondary);
+}
+
+.table caption span > span {
+  letter-spacing: 0.2rem;
+
+  color: var(--black);
+}
+
+.table tbody {
+  display: grid;
+  min-width: 320px;
+  padding: 1.2rem 0;
+}
+
+.table td,
+.table th:not(.day-overview) {
+  width: 4rem;
+  display: inline-flex;
+  padding: 1rem 0;
+}
+
+.table thead tr,
+.weather-columns,
+.hour-interval {
+  display: inline-grid;
+  grid-auto-columns: 1fr;
+  grid-gap: 1rem;
+  grid-auto-flow: column;
+}
+
+.hour-interval {
+  padding: 0 0.4rem;
+  margin: 0.4rem 0;
+}
+
+.table .weather-columns > th {
+  font-weight: 400;
+  font-variant-caps: all-petite-caps;
+}
+
+.day-overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.4rem;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.8rem;
+}
+
+.day-overview > span:first-of-type {
+  flex: 2;
+  font-size: 2rem;
+}
+
+.day-overview > span:not(:first-of-type) {
+  flex: 1;
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+
+.details .day-overview {
+  padding: 0;
+  background: none;
+  justify-content: center;
+}
+
+.details .day-overview > span {
+  font-size: 2.6rem;
+  color: var(--primary);
+  font-variant-caps: all-petite-caps;
+  text-align: center;
+}
+
+.weather-icon {
+  width: 3rem;
+  height: 3rem;
+  background: #ffffffba;
+  border-radius: 50%;
+}
+
+tr:nth-child(even).hour-interval {
+  background: var(--lightblue);
+  border-radius: 0.4rem;
+}
+
+.th-time {
+  font-weight: 600;
+}
+
+button {
+  color: var(--white);
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 0.4rem;
+  background: var(--secondary);
+  align-self: center;
+}
+
+.forecast-switcher {
+  z-index: 50;
+  position: fixed;
+  bottom: 0;
+  right: 1rem;
+  left: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+}
+
+.forecast-switcher button {
+  padding: 0.4rem 1rem;
+  font-variant-caps: all-petite-caps;
+  color: var(--white);
+  background: var(--primary);
+}
+
+.forecast-switcher .unit-switch {
+  background: var(--secondary);
+}
+
+.forecast-switcher > button:first-child {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.forecast-switcher > button:last-child {
+  border-radius: 0 1rem 1rem 0;
+}
+
+.current-weather {
+  flex: 0 1 24rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.current-weather .temp {
+  font-size: 4rem;
+  letter-spacing: 2px;
+}
+
+.current-weather .temp > span:first-of-type {
+  margin-right: 0.4rem;
+}
+
+.current-weather figure {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.current-weather figure img {
+  margin-left: 0.4rem;
+}
+
+.current-weather ul {
+  text-transform: capitalize;
+  flex: 0 1 20rem;
+}
+
+.current-weather ul li {
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.1rem;
+}
+
+.current-weather ul li > span:first-child {
+  align-self: flex-start;
+  color: var(--primary);
+}
+
+.unit {
+  text-transform: lowercase;
+  margin-left: 0.2rem;
+}
+
+.direction {
+  font-variant-caps: all-petite-caps;
+  font-weight: 600;
+  margin-left: 0.2rem;
+}
