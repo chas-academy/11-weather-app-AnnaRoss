@@ -35,8 +35,8 @@ ul {
 
 :root {
   --primary: lightseagreen;
-  --secondary: #f8748b;
-  --lightblue: #20b2aa2b;
+  --secondary: hotpink;
+  --light: #20b2aa2b;
   --white: #ffffff;
   --black: #1b001e;
 }
@@ -86,22 +86,12 @@ section.overview {
   padding: 1rem;
 }
 
-.table caption > span:first-child {
-  font-weight: 600;
-}
-
-.table caption > span:first-child > span {
-  font-weight: 600;
-  color: var(--primary);
-}
-
+.table caption > span:first-child > span,
 .table caption > span:nth-child(2) {
   color: var(--secondary);
 }
 
 .table caption span > span {
-  letter-spacing: 0.2rem;
-
   color: var(--black);
 }
 
@@ -135,6 +125,7 @@ section.overview {
 .table .weather-columns > th {
   font-weight: 400;
   font-variant-caps: all-petite-caps;
+  color: var(--secondary);
 }
 
 .day-overview {
@@ -179,23 +170,12 @@ section.overview {
 }
 
 tr:nth-child(even).hour-interval {
-  background: var(--lightblue);
+  background: var(--light);
   border-radius: 0.4rem;
 }
 
 .th-time {
   font-weight: 600;
-}
-
-button {
-  color: var(--white);
-  text-align: center;
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 1px;
-  padding: 0.4rem;
-  background: var(--secondary);
-  align-self: center;
 }
 
 .forecast-switcher {
@@ -210,6 +190,17 @@ button {
   padding-bottom: 1rem;
 }
 
+button {
+  align-self: center;
+  padding: 0.4rem;
+  color: var(--white);
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  background: var(--secondary);
+}
+
 .forecast-switcher button {
   padding: 0.4rem 1rem;
   font-variant-caps: all-petite-caps;
@@ -217,12 +208,9 @@ button {
   background: var(--primary);
 }
 
-.forecast-switcher .unit-switch {
-  background: var(--secondary);
-}
-
 .forecast-switcher > button:first-child {
   border-radius: 1rem 0 0 1rem;
+  background: var(--secondary);
 }
 
 .forecast-switcher > button:last-child {
